@@ -12,14 +12,15 @@
   <body>
     <!-- Navbar -->
     <nav class="navbar navbar-dark bg-dark">
-      <h3 class="text-light">Weather Dashboard</h3>
+      <h1 class="navbar-text text-light">Weather Dashboard</h1>
     </nav>
-      <!-- Bootstrap Container -->
+    
+    <!-- Bootstrap Container -->
     <div class="container">
       <div class="row">
 
         <!-- Search Column -->
-        <div class="col-xs-4">
+        <div class="col-xs-3">
           <label for="btnSearch">Search for a City:</label>
           <div class="input-group">
             <input type="text" class="form-control form-control-lg" placeholder="Salt Lake City" aria-label="Search location" aria-describedby="btnSearch">
@@ -30,8 +31,66 @@
         </div>
 
         <!-- Results Column -->
-        <div class="col-xs-8">
-          TEXT
+        <div class="col-xs-9">
+          <!-- Today Card -->
+          <div class="row">
+            <div class="card">
+              <h2 class="card-header">City / Date</h2>
+              <div class="card-body">
+                <h3 class="card-title">Temperature / Icon</h3>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Humidity</li>
+                  <li class="list-group-item">Wind Speed</li>
+                  <li class="list-group-item">UV Index</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Five Day Forecast -->
+          <div class="card-deck">
+            <div class="card">
+              <h4 class="card-header">Date 1</h4>
+              <div class="card-body">
+                <h5 class="card-title">Icon</h5>
+                <p class="card-text">Temperature</p>
+                <p class="card-text">Humidity</p>
+              </div>
+            </div>
+            <div class="card">
+              <h4 class="card-header">Date 2</h4>
+              <div class="card-body">
+                <h5 class="card-title">Icon</h5>
+                <p class="card-text">Temperature</p>
+                <p class="card-text">Humidity</p>
+              </div>
+            </div>
+            <div class="card">
+              <h4 class="card-header">Date 3</h4>
+              <div class="card-body">
+                <h5 class="card-title">Icon</h5>
+                <p class="card-text">Temperature</p>
+                <p class="card-text">Humidity</p>
+              </div>
+            </div>
+            <div class="card">
+              <h4 class="card-header">Date 4</h4>
+              <div class="card-body">
+                <h5 class="card-title">Icon</h5>
+                <p class="card-text">Temperature</p>
+                <p class="card-text">Humidity</p>
+              </div>
+            </div>
+            <div class="card">
+              <h4 class="card-header">Date 5</h4>
+              <div class="card-body">
+                <h5 class="card-title">Icon</h5>
+                <p class="card-text">Temperature</p>
+                <p class="card-text">Humidity</p>
+              </div>
+            </div>
+          </div>
+
         </div>   
       </div>
     </div>
