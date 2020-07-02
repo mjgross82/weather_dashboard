@@ -1,14 +1,20 @@
-// Wait until document fully loads to run script
-$(document).ready(function() {
-
     // OpenWeather API Key and URL
     var APIKey = "f7298ae521ac0931bc7a0c7fed9d21ad";
     var city = "Salt Lake City";
-    var todayURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
-    getWeather();
+    
+    // Populate site with SLC info on site load
+    getWeather(city);
+
+    // Function to show weather based on user input
+    $("#btnSearch").on("click", function() {
+        city = $("#citySearch").val();
+        $("#citySearch").val('');
+        getWeather(city);
+    });
 
     // Function to call the API using the city named in var City
-    function getWeather() {
+    function getWeather(city) {
+        var todayURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
         $.ajax({
             url: todayURL,
             method: "GET"
@@ -52,5 +58,4 @@ $(document).ready(function() {
                 });
             });
         });
-    };    
-});
+    };
