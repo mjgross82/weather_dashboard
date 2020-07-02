@@ -22,9 +22,13 @@ $(document).ready(function() {
             var futureURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly&appid=" + APIKey;
             // Populate today's forecast
             icon = response.weather[0].icon;
+            iconAlt = response.weather[0].description;
             iconURL = "http://openweathermap.org/img/w/" + icon + ".png";
             $("#todayLocale").text(response.name + " DATE");
-            $("#todayTemp").text(degrees + "° F");
+            $("#todayTemp").text(degrees + "° F  ");
+            $("#todayTemp").append("<img id='wIcon'>");
+            $("#wIcon").attr("src", iconURL);
+            $("#wIcon").attr("alt", iconAlt);
             $("#todayHumid").text("Humidity: " + response.main.humidity + "%");
             $("#todayWind").text("Wind Speed: " + response.wind.speed + " MPH");
             // Function to call the API for forecast data and populate into HTML
@@ -37,6 +41,11 @@ $(document).ready(function() {
                 var daily = response.daily;
                 var forecast = [0, 1, 2, 3, 4];
                 $.each(forecast, function(value) {
+                    icon = daily[value].weather[0].icon;
+                    iconAlt = daily[value].weather[0].description;
+                    iconURL = "http://openweathermap.org/img/w/" + icon + ".png";
+                    $("#" + (value + 1) + "icon").attr("src", iconURL);
+                    $("#" + (value + 1) + "icon").attr("alt", iconAlt);
                     var temp = Math.round((daily[value].temp.day - 273.15) * 1.80 + 32);
                     $("#" + (value + 1) + "temp").text(temp + "° F");
                     $("#" + (value + 1) + "humid").text("Humidity: " + daily[value].humidity + "%")
