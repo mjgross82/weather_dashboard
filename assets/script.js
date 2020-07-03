@@ -18,14 +18,14 @@ $("#btnSearch").on("click", function () {
 });
 
 // Function to show weather when user clicks on a city from their history
-$("#history").on("click", "button", function() {
+$("#history").on("click", "button", function () {
     city = $(this).text();
     $("#citySearch").val('');
     getWeather(city);
 });
 
 // Function to save the current search term into local storage
-function saveSearch(city) {            
+function saveSearch(city) {
     localStorage.removeItem("4");
     var move3 = localStorage.getItem("3");
     localStorage.setItem("4", move3);
@@ -39,9 +39,11 @@ function saveSearch(city) {
 };
 
 function showHistory() {
-    for (i = 0; i < localStorage.length && i < 5; i++) {
-        var prevCity = localStorage.getItem(i);
-        $("#history").append('<li class="list-group-item"><button type="button" class="btn btn-dark">' + prevCity + '</button></li>');
+    if (localStorage.length > 0) {
+        for (i = 0; i < 5; i++) {
+            var prevCity = localStorage.getItem(i);
+            $("#history").append('<li class="list-group-item"><button type="button" class="btn btn-dark">' + prevCity + '</button></li>');
+        };
     };
 };
 
@@ -86,7 +88,7 @@ function getWeather(city) {
             var forecast = [0, 1, 2, 3, 4];
             $.each(forecast, function (value) {
                 dayW = date.getDay();
-                    $("#" + (value + 1) + "date").text(days[(dayW + value)]);
+                $("#" + (value + 1) + "date").text(days[(dayW + value)]);
                 icon = daily[value].weather[0].icon;
                 iconAlt = daily[value].weather[0].description;
                 iconURL = "http://openweathermap.org/img/w/" + icon + ".png";
