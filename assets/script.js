@@ -60,12 +60,16 @@ function getWeather(city) {
         var lon = response.coord.lon;
         var futureURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly&appid=" + APIKey;
         // Populate today's forecast
-        icon = response.weather[0].icon;
-        iconAlt = response.weather[0].description;
-        iconURL = "http://openweathermap.org/img/w/" + icon + ".png";
-        $("#todayLocale").text(response.name + " DATE");
-        $("#todayTemp").text(degrees + "° F  ");
-        $("#todayTemp").append("<img id='wIcon'>");
+        var date = new Date();
+        var month = date.getMonth();
+        var day = date.getDate();
+        var year = date.getFullYear();
+        var icon = response.weather[0].icon;
+        var iconAlt = response.weather[0].description;
+        var iconURL = "http://openweathermap.org/img/w/" + icon + ".png";
+        $("#todayLocale").text(response.name + " (" + month + "/" + day + "/" + year + ")");
+        $("#todayTemp").text("  " + degrees + "° F  ");
+        $("#todayTemp").prepend("<img id='wIcon'>");
         $("#wIcon").attr("src", iconURL);
         $("#wIcon").attr("alt", iconAlt);
         $("#todayHumid").text("Humidity: " + response.main.humidity + "%");
@@ -78,15 +82,18 @@ function getWeather(city) {
             console.log(response);
             $("#todayUV").text("UV Index: " + response.current.uvi);
             var daily = response.daily;
+            var days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu"];
             var forecast = [0, 1, 2, 3, 4];
             $.each(forecast, function (value) {
+                dayW = date.getDay();
+                    $("#" + (value + 1) + "date").text(days[(dayW + value)]);
                 icon = daily[value].weather[0].icon;
                 iconAlt = daily[value].weather[0].description;
                 iconURL = "http://openweathermap.org/img/w/" + icon + ".png";
                 $("#" + (value + 1) + "icon").attr("src", iconURL);
                 $("#" + (value + 1) + "icon").attr("alt", iconAlt);
                 var temp = Math.round((daily[value].temp.day - 273.15) * 1.80 + 32);
-                $("#" + (value + 1) + "temp").text(temp + "° F");
+                $("#" + (value + 1) + "temp").text(temp + "°");
                 $("#" + (value + 1) + "humid").text(daily[value].humidity + "%")
             });
         });
