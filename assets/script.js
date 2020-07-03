@@ -40,9 +40,14 @@ function saveSearch(city) {
 
 function showHistory() {
     if (localStorage.length > 0) {
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < 5; i++) {  
             var prevCity = localStorage.getItem(i);
+            if (prevCity === "null") {
+                return;
+            }
+            else {
             $("#history").append('<li class="list-group-item"><button type="button" class="btn btn-dark">' + prevCity + '</button></li>');
+            };
         };
     };
 };
