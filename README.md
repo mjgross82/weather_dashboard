@@ -4,4 +4,5 @@ The dashboard will display current conditions and five day forecast for a given 
 It will also store up to five of the user's most recent searches as clickable buttons.
 
 [Link](https://mjgross82.github.io/weather_dashboard/)
+
 ![screenshot](./assets/screenshot.png)
