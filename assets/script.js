@@ -8,12 +8,20 @@ showHistory();
 
 // Function to show weather based on user input
 $("#btnSearch").on("click", function () {
+    $("#citySearch").attr("placeholder", '');
     city = $("#citySearch").val();
-    $("#citySearch").val('');
     getWeather(city);
     saveSearch(city);
     $("#history").empty();
     showHistory();
+    $("#citySearch").val('');
+});
+
+// Function to show weather when user clicks on a city from their history
+$("#history").on("click", "button", function() {
+    city = $(this).text();
+    $("#citySearch").val('');
+    getWeather(city);
 });
 
 // Function to save the current search term into local storage
