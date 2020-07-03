@@ -39,7 +39,7 @@ function saveSearch(city) {
 };
 
 function showHistory() {
-    for (i = 0; i < 5; i++) {
+    for (i = 0; i < localStorage.length && i < 5; i++) {
         var prevCity = localStorage.getItem(i);
         $("#history").append('<li class="list-group-item"><button type="button" class="btn btn-dark">' + prevCity + '</button></li>');
     };
