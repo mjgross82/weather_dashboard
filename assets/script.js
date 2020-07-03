@@ -59,7 +59,6 @@ function getWeather(city) {
         url: todayURL,
         method: "GET"
     }).then(function (response) {
-        console.log(response);
         // Convert temperature Kelvin to Fahrenheit
         var degrees = Math.round((response.main.temp - 273.15) * 1.8 + 32);
         // Save latitude and longitude in variables to call in forecast API
@@ -86,8 +85,17 @@ function getWeather(city) {
             url: futureURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
-            $("#todayUV").text("UV Index: " + response.current.uvi);
+            var UVI = response.current.uvi
+            $("#todayUV").text("UV Index: " + UVI + "  ");
+            if (UVI <= 2) {
+                $("#todayUV").append('<span class="badge badge-success">Favorable</span>');
+            }
+            else if (UVI >= 6) {
+                $("#todayUV").append('<span class="badge badge-danger">Severe</span>');
+            }
+            else {
+                $("#todayUV").append('<span class="badge badge-warning">Moderate</span>');;
+            };
             var daily = response.daily;
             var days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu"];
             var forecast = [0, 1, 2, 3, 4];
