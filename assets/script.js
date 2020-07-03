@@ -4,6 +4,7 @@ var city = "Salt Lake City";
 
 // Populate site with SLC info on site load
 getWeather(city);
+showHistory();
 
 // Function to show weather based on user input
 $("#btnSearch").on("click", function () {
@@ -11,8 +12,11 @@ $("#btnSearch").on("click", function () {
     $("#citySearch").val('');
     getWeather(city);
     saveSearch(city);
+    $("#history").empty();
+    showHistory();
 });
 
+// Function to save the current search term into local storage
 function saveSearch(city) {            
     localStorage.removeItem("4");
     var move3 = localStorage.getItem("3");
@@ -23,8 +27,15 @@ function saveSearch(city) {
     localStorage.setItem("2", move1);
     var move0 = localStorage.getItem("0");
     localStorage.setItem("1", move0);
-    localStorage.setItem("0",city);
-}
+    localStorage.setItem("0", city);
+};
+
+function showHistory() {
+    for (i = 0; i < 5; i++) {
+        var prevCity = localStorage.getItem(i);
+        $("#history").append('<li class="list-group-item"><button type="button" class="btn btn-dark">' + prevCity + '</button></li>');
+    };
+};
 
 // Function to call the API using the city named in var City
 function getWeather(city) {
@@ -68,7 +79,7 @@ function getWeather(city) {
                 $("#" + (value + 1) + "icon").attr("alt", iconAlt);
                 var temp = Math.round((daily[value].temp.day - 273.15) * 1.80 + 32);
                 $("#" + (value + 1) + "temp").text(temp + "° F");
-                $("#" + (value + 1) + "humid").text("Humidity: " + daily[value].humidity + "%")
+                $("#" + (value + 1) + "humid").text(daily[value].humidity + "%")
             });
         });
     });
